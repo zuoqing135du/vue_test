@@ -7,7 +7,8 @@
         <menus label="系统设置">
           <menu-item  v-for="item in apps" icon="users" >{{item.appName}}</menu-item>
           <div class="divider"></div>
-          <menu-item icon="sign-out">退出登录</menu-item>
+          <menu-item icon="sign-out" v-on:click="reverseMessage">退出登录</menu-item>
+          <button v-on:click="reverseMessage">Greet</button>
         </menus>
       </div>
     </div>
@@ -36,6 +37,7 @@
             route: '/Hello3'
           }
         ],
+        someData: {},
         apps: [{appName: '系统管理', appUrl: 'systemManage'},
           {appName: '客户管理', appUrl: 'customer'},
           {appName: '家装贷款', appUrl: 'systemOption'},
@@ -51,7 +53,12 @@
     },
     methods: {
       reverseMessage: function () {
-        this.message = this.message.split('').reverse().join('')
+        this.$http.jsonp('http://localhost:8081/login/login', {}).then(response => {
+          alert(response)
+        }, response => {
+          // error callback
+        })
+//        this.$http.jsonp('http://localhost:8081/login/login', [options]).then(successCallback, errorCallback);
       }
     }
   }
