@@ -1,7 +1,6 @@
 <template>
   <div id="app">
 
-
     <div class="column is-3" style="float: left;width: 20%" >
       <div class="menu is-dark">
         <menus label="系统设置">
@@ -53,41 +52,22 @@
     },
     methods: {
       reverseMessage: function () {
-        this.$http.jsonp('https://news-at.zhihu.com/api/4/version/android/2.3.0', {}).then(response => {
-          alert(response)
-        }, response => {
-          // error callback
+        this.$http.get('/api/4/version/android/2.3.0', {}, {
+          headers: {
+
+          },
+          emulateJSON: true
+        }).then(function (res) {
+          this.musics = res.data.msg
+          alert(res.data.msg)
+        }, function (error) {
+          console.log(error)
         })
-//        this.$http.jsonp('http://localhost:8081/login/login', [options]).then(successCallback, errorCallback);
       }
     }
   }
 </script>
 
 <style>
- /* #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-  }*/
-
-/*  ul li {
-    display: inline-block;
-    margin-right: 10px;
-  }
-  ul li a{
-    display: inherit;
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-  }
-  ul li a:hover{
-    cursor: pointer;
-    color: #fff;
-    background-color: #138bec;
-    border: 1px solid #138bec;
-  }*/
 
 </style>

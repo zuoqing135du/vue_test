@@ -6,13 +6,14 @@ import router from './router'
 
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
-
 Vue.config.productionTip = false
-
 // 路由跳转
 Vue.prototype.$goRoute = function (index) {
   this.$router.push(index)
 }
+
+Vue.prototype.HOST = '/api'
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
