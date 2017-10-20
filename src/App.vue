@@ -53,7 +53,7 @@
     },
     methods: {
       reverseMessage: function () {
-        this.$http.jsonp('http://localhost:8081/login/login', {}).then(response => {
+        this.$http.jsonp('https://news-at.zhihu.com/api/4/version/android/2.3.0', {}).then(response => {
           alert(response)
         }, response => {
           // error callback
