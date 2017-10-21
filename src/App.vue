@@ -1,16 +1,15 @@
 <template>
-  <div id="app">
+  <div id="app" >
 
-    <div class="column is-3" style="float: left;width: 20%" >
-      <div class="menu is-dark">
-        <menus label="系统设置">
-          <menu-item  v-for="item in apps" icon="users" >{{item.appName}}</menu-item>
-          <div class="divider"></div>
-          <menu-item icon="sign-out" v-on:click="reverseMessage">退出登录</menu-item>
-          <button v-on:click="reverseMessage">Greet</button>
-        </menus>
-      </div>
-    </div>
+    <el-row>
+      <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
+      <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
+      <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
+      <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
+      <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
+      <el-col :span="4"><div class="grid-content bg-purple-light" @click="toLogin">去登录</div></el-col>
+    </el-row>
+    <!--<el-button :plain="true" @click="open">打开消息提示</el-button>-->
 
     <router-view  style="float: left;width: 80%"></router-view>
 
@@ -18,56 +17,39 @@
 </template>
 
 <script>
+  import ElButton from '../node_modules/element-ui/packages/button/src/button'
   export default {
+    components: {ElButton},
     name: 'app',
     data () {
       return {
-        links: [
-          {
-            text: '界面1',
-            route: '/Hello'
-          },
-          {
-            text: '界面2',
-            route: '/Hello2'
-          },
-          {
-            text: '界面3',
-            route: '/Hello3'
-          }
-        ],
-        someData: {},
-        apps: [{appName: '系统管理', appUrl: 'systemManage'},
-          {appName: '客户管理', appUrl: 'customer'},
-          {appName: '家装贷款', appUrl: 'systemOption'},
-          {appName: '车贷管理', appUrl: 'systemOption'},
-          {appName: '评估管理', appUrl: 'systemOption'},
-          {appName: '法务管理', appUrl: 'systemOption'},
-          {appName: '统计报表', appUrl: 'systemOption'},
-          {appName: '评估管理', appUrl: 'systemOption'},
-          {appName: '法务管理', appUrl: 'systemOption'},
-          {appName: '统计报表', appUrl: 'systemOption'},
-          {appName: '考核管理', appUrl: 'systemOption'}]
       }
     },
     methods: {
       reverseMessage: function () {
         this.$http.get('/api/4/version/android/2.3.0', {}, {
-          headers: {
-
-          },
-          emulateJSON: true
         }).then(function (res) {
-          this.musics = res.data.msg
-          alert(res.data.msg)
+          this.$message(res.data.msg)
         }, function (error) {
           console.log(error)
         })
+      },
+      toLogin: function () {
+        this.$router.push({path: 'Hello2'})
       }
     }
   }
 </script>
 
 <style>
-
+  .bg-purple {
+    background: #d3dce6;
+  }
+  .bg-purple-light {
+    background: #e5e9f2;
+  }
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+  }
 </style>
