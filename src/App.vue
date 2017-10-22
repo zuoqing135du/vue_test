@@ -7,7 +7,7 @@
       <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
       <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
       <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-      <el-col :span="4"><div class="grid-content bg-purple-light" @click="toLogin">去登录</div></el-col>
+      <el-col :span="4"><div class="grid-content bg-purple-light" @click="reverseMessage">去登录</div></el-col>
     </el-row>
     <!--<el-button :plain="true" @click="open">打开消息提示</el-button>-->
 

@@ -1,12 +1,11 @@
 <template>
   <div class="hello">
-
-    <div class="column is-3" style="float: left;width: 20%" >
+    <div class="column is-3" style="float: left;width: 20%;" >
       <div class="menu is-dark">
         <menus label="系统设置">
           <menu-item  v-for="item in apps" icon="users" >{{item.appName}}</menu-item>
           <div class="divider"></div>
-          <menu-item icon="sign-out" v-on:click="reverseMessage">退出登录</menu-item>
+          <menu-item icon="sign-out" >退出登录</menu-item>
           <button v-on:click="reverseMessage">Greet</button>
         </menus>
       </div>
