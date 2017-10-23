@@ -7,7 +7,7 @@
       <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
       <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
       <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-      <el-col :span="4"><div class="grid-content bg-purple-light" @click="reverseMessage">去登录</div></el-col>
+      <el-col :span="4"><div class="grid-content bg-purple-light" @click="reverseMessage1">测试</div></el-col>
     </el-row>
     <!--<el-button :plain="true" @click="open">打开消息提示</el-button>-->
 
@@ -23,19 +23,11 @@
     name: 'app',
     data () {
       return {
+        name: ''
       }
     },
     methods: {
-      reverseMessage: function () {
-        this.$http.get('/api/4/version/android/2.3.0', {}, {
-        }).then(function (res) {
-          this.$message(res.data.msg)
-        }, function (error) {
-          console.log(error)
-        })
-      },
-      toLogin: function () {
-        this.$router.push({path: 'Hello2'})
+      reverseMessage1: function () {
       }
     }
   }

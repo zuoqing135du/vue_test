@@ -3,19 +3,21 @@
     <div class="column is-3" style="float: left;width: 20%;" >
       <div class="menu is-dark">
         <menus label="系统设置">
-          <menu-item  v-for="item in apps" icon="users" >{{item.appName}}</menu-item>
+          <menu-item  v-for="item in menu1" icon="users" >{{item.menuName}}</menu-item>
           <div class="divider"></div>
           <menu-item icon="sign-out" >退出登录</menu-item>
-          <button v-on:click="reverseMessage">Greet</button>
+          <el-button @click="menu11" >fsdfs</el-button>
         </menus>
       </div>
     </div>
 
+    <router-view  style="float: left;width: 80%"></router-view>
   </div>
 </template>
 
-<script>
+<script>import ElButton from '../../node_modules/element-ui/packages/button/src/button'
 export default {
+  components: {ElButton},
   name: 'hello',
   data () {
     return {
@@ -31,8 +33,69 @@ export default {
         {appName: '评估管理', appUrl: 'systemOption'},
         {appName: '法务管理', appUrl: 'systemOption'},
         {appName: '统计报表', appUrl: 'systemOption'},
-        {appName: '考核管理', appUrl: 'systemOption'}]
+        {appName: '考核管理', appUrl: 'systemOption'}],
+      menu1: {}
     }
+  },
+  created: function () {
+    // `this` 指向 vm 实例
+    this.$http.get('/api/system/getMenuList', {}, {
+    }).then(function (res) {
+      if (res.data.code === 1) {
+        console.log(res.data.data)
+        this.menu1 = res.data.data
+      } else {
+        console.log(res.data.msg)
+      }
+    }, function (error) {
+      console.log(error)
+    })
+  },
+  mounthed: function () {
+    console.log('开始执行mounthed')
+    this.$http.get('/api/system/getMenuList', {}, {
+    }).then(function (res) {
+      if (res.data.code === 1) {
+        console.log(res.data.data)
+      } else {
+        console.log(res.data.msg)
+      }
+    }, function (error) {
+      console.log(error)
+    })
+  },
+  methods: {
+    login: function () {
+      if (this.nickname === '' || this.pswd === ' ') {
+        this.$message('请输入用户名和密码')
+        return
+      }
+      this.$http.get('/api/login/pcLogin', {params: {nickname: this.nickname, pswd: this.pswd}}, {
+      }).then(function (res) {
+        if (res.data.code === 1) {
+          this.$router.push({path: 'Hello2'})
+          this.$message(res.data.msg)
+        } else {
+          this.$message(res.data.msg)
+        }
+      }, function (error) {
+        console.log(error)
+      })
+    },
+    menu11: function () {
+      this.$http.get('/api/system/getMenuList', {}, {
+      }).then(function (res) {
+        if (res.data.code === 1) {
+          console.log(res.data.data)
+          this.menu1 = res.data.data
+        } else {
+          console.log(res.data.msg)
+        }
+      }, function (error) {
+        console.log(error)
+      })
+    }
+
   }
 }
 </script>

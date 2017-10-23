@@ -12,7 +12,7 @@
             <el-input v-model="pswd"   placeholder="请输入pswd" value="123456"></el-input>
           </el-form-item>
           <el-button class="row_style" type="primary" @click="login">登录</el-button>
-          <el-button class="row_style" type="primary">忘记密码</el-button>
+          <el-button class="row_style" type="primary" @click="getPwdAgain">忘记密码</el-button>
         </el-form>
 
         </div>
@@ -49,14 +49,16 @@
         this.$http.get('/api/login/pcLogin', {params: {nickname: this.nickname, pswd: this.pswd}}, {
         }).then(function (res) {
           if (res.data.code === 1) {
+            this.$message('登录' + res.data.msg)
             this.$router.push({path: 'Hello2'})
-            this.$message(res.data.msg)
           } else {
             this.$message(res.data.msg)
           }
         }, function (error) {
           console.log(error)
         })
+      },
+      getPwdAgain: function () {
       }
     }
   }
